@@ -1,0 +1,6 @@
+"Ubuntu 22.04 LTS fix issue where tab completion doesn't work with nocompatible.
+set nocompatible
+
+set tabstop=2
+set shiftwidth=2
+set expandtab
