@@ -1,0 +1,54 @@
+#compdef _gobuster gobuster
+
+args=(
+  '(--debug)'{--debug}'[debug]'
+  '(-h --help)'{-h, --help}'[debug]'
+)
+
+_gobuster() {
+    local line state
+
+    _arguments -C \
+               "1: :->cmds" \
+               "*::arg:->args"
+    case "$state" in
+        cmds)
+            _values "gobuster command" \
+                    "dir[enumerate web dir]" \
+                    "dns[enumerate dns]"\
+                    "vhost[enumerate Apache vhosts]"
+            ;;
+        args)
+            case $line[1] in
+                dir)
+                    _gobuster_dir
+                    ;;
+                dns)
+                    _gobuster_dns
+                    ;;
+                vhost)
+                    _gobuster_vhost
+                    ;;
+            esac
+            ;;
+    esac
+}
+
+_gobuster_dir() {
+    _arguments -s \
+               {-w,--wordlist}'[wordlist.]'\
+               {-u,--url}'[url.]'
+}
+
+_gobuster_dns() {
+    _arguments -s \
+               {-w,--wordlist}'[wordlist.]'\
+               {-d,--domain}'[domain.]'
+}
+
+_gobuster_vhost() {
+    _arguments -s \
+               {-w,--wordlist}'[wordlist.]'\
+               {-u,--url}'[url.]'
+}
+
